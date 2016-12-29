@@ -1,0 +1,167 @@
+/* Validate the given form using JavaScript. Display errors in error-box if any field value is incorrect. */
+
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html"; charset="UTF-8" />
+<script>
+function checkform() {
+  document.getElementById("errorBox").innerHTML = " ";
+  var name = document.forms["hans"]["Name"].value;
+  if(!checkname(name))
+  {
+document.getElementById("errorBox").innerHTML = document.getElementById("errorBox").innerHTML  +  " ";
+  }
+  else {
+
+
+document.getElementById("errorBox").innerHTML = document.getElementById("errorBox").innerHTML + "<br>" + "firstname cant have numbers and special characters";
+
+  }
+
+  var name = document.forms["hans"]["LastName"].value;
+
+  if(!checkname(name))
+  {
+    document.getElementById("errorBox").innerHTML = document.getElementById("errorBox").innerHTML +  " ";
+  }
+  else
+  {
+document.getElementById("errorBox").innerHTML = document.getElementById("errorBox").innerHTML + "<br>" + "lastname cant have numbers and special characters";
+  }
+
+  var email = document.forms['hans']['Email'].value;
+  if(checkemail(email))
+  {
+document.getElementById("errorBox").innerHTML = document.getElementById("errorBox").innerHTML + " ";
+  }
+  else {
+  document.getElementById("errorBox").innerHTML = document.getElementById("errorBox").innerHTML + "<br>" + "email format is not correct-it should have @ and a a word extension after [dot]";
+  }
+
+  var password = document.forms['hans']['Password'].value;
+  if(checkpass(password))
+  {
+        document.getElementById("errorBox").innerHTML = document.getElementById("errorBox").innerHTML +  " ";
+  }
+  else {
+    document.getElementById("errorBox").innerHTML = document.getElementById("errorBox").innerHTML + "<br>" + "password format is not correct- Atleast 6 characters with a number and a upper-case letter";
+  }
+
+  var age = document.forms['hans']['Age'].value;
+  if(!checkage(age))
+  {
+          document.getElementById("errorBox").innerHTML = document.getElementById("errorBox").innerHTML +  "<br>" + "age can have only numbers and should be less than 150 and greater than 1";
+  }
+  else {
+
+document.getElementById("errorBox").innerHTML = document.getElementById("errorBox").innerHTML +  " ";
+  }
+
+  return false;
+}
+
+function checkage(t) {
+
+  if(t<=150 && t>=1)
+  {
+  //  var regex = /[^0-9]/g;
+    //return regex.test(t);
+if(t == parseInt(t, 10))
+{
+  return true;
+}
+else {
+  return false;
+}
+  }
+  else {
+    return false;
+  }
+}
+
+function checkpass(t)
+{
+  var x = t.length;
+if(x>=6)
+  {
+var regex = /^(?=.*\d)(?=.*[A-Z])(?=.*\w)\W*/g;
+return regex.test(t);
+  }
+  else {
+    return false;
+  }
+}
+
+
+
+function checkemail(t)
+{
+var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+return regex.test(t);
+}
+
+function checkname(t)
+{
+var regex = /[^a-zA-Z]/g;
+return regex.test(t);
+}
+
+
+function hasNumbers(t)
+{
+var regex = /\d/g;
+return regex.test(t);
+}
+</script>
+</head>
+<body>
+
+  <div id="container_body" align="center">
+
+	<div>
+      <h2 class="form_title"> Registration Form </h2>
+    </div>
+
+	   <form name="hans" method="post" action="" id="registration" onsubmit="return checkform()">
+
+	   <div id="errorBox"></div>
+
+
+	   <div id="name">
+	   Name<br />
+        <input type="text" name="Name" value="" placeholder="First Name"  class="input_name" required>
+        <input type="text" name="LastName" value="" placeholder="Last Name" class="input_name" required>
+        </div>
+
+	  <div id="email">
+	  Email<br />
+        <input type="text" name="Email" value=""  placeholder="abcd123@xyz.xyz" class="input_email" required>
+		</div>
+
+	  <div id="password">
+	  Password<br />
+        <input  type="password" name="Password" value="" placeholder="New Password" class="input_password" required>
+      </div>
+
+	  <div id="age">
+		 Age:<br />
+        <input type="text"    name="Age" value=""  placeholder="Age" class="input_age" required>
+      </div>
+
+	  <div id="radio_button">
+        <input type="radio" name="Gender" value="Female" required>
+        <label >Female</label>
+        <input type="radio" name="Gender" value="Male" required>
+        <label >Male</label>
+      </div>
+
+	  <div>
+        <input type="submit" value="submit" id="sign_user"></input>
+      </div>
+
+     </form>
+    </div>
+</body>
+
+</html>
